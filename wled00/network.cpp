@@ -135,6 +135,17 @@ const ethernet_settings ethernetBoards[] = {
       ETH_CLOCK_GPIO0_IN  // eth_clk_mode
   },
 
+  // ETH TO PIXEL REV 1.0 - @SECOND-STRING
+  {
+      1,                  // eth_address,
+      4,                  // eth_power,
+      32,                 // eth_mdc,
+      33,                 // eth_mdio,
+      ETH_PHY_LAN8720,    // eth_type,
+      ETH_CLOCK_GPIO0_IN  // eth_clk_mode
+  },
+  
+
 };
 #endif
 

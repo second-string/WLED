@@ -284,7 +284,7 @@
 #define BTN_TYPE_ANALOG_INVERTED  8
 
 //Ethernet board types
-#define WLED_NUM_ETH_TYPES       12
+#define WLED_NUM_ETH_TYPES       13
 
 #define WLED_ETH_NONE             0
 #define WLED_ETH_WT32_ETH01       1
@@ -298,6 +298,7 @@
 #define WLED_ETH_ABCWLEDV43ETH    9
 #define WLED_ETH_SERG74          10
 #define WLED_ETH_SECOND_STRING    11
+#define WLED_ETH_PIX_CONTROLLER_1_0_SECOND_STRING    12
 
 //Hue error codes
 #define HUE_ERROR_INACTIVE        0
