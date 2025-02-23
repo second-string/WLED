@@ -214,7 +214,18 @@ bool PinManager::isPinOk(byte gpio, bool output)
     // JTAG: GPIO39-42 are usually used for inline debugging
     // GPIO46 is input only and pulled down
   #else
-    if (gpio > 5 && gpio < 12) return false;      //SPI flash pins
+    // We are checking -D4 here, but in reality we're pretending like we're seeing V3/V3-02. The getChipModel will never return those, so this logic will break if flashed on an actual D4. The 'else' clause here is the logic that should apply for an actual D4, but this is our custom build so we dgaf.
+    if (strncmp_P(PSTR("ESP32-PICO-D4"), ESP.getChipModel(), 13) == 0) {
+      // Only two in-package flash pins used for V3/V3-02
+      if (gpio == 6 || gpio == 11) return false;
+
+      // Only V3-02 has internal psram on these two IO, V3 can use them normally
+      if (gpio == 9 || gpio == 10)  return psramFound();
+    } else {
+      if (gpio > 5 && gpio < 12) return false;      //SPI flash pins
+    }
+
+    // IO17 doesn't exist on PICO-V3/V3-02 , doesn't matter what we do with it. Only matters for -D4
     if (strncmp_P(PSTR("ESP32-PICO"), ESP.getChipModel(), 10) == 0 && (gpio == 16 || gpio == 17)) return false; // PICO-D4: gpio16+17 are in use for onboard SPI FLASH
     if (gpio == 16 || gpio == 17) return !psramFound(); //PSRAM pins on ESP32 (these are IO)
   #endif
